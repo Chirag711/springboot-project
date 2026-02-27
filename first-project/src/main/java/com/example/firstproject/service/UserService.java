@@ -33,7 +33,13 @@ public class UserService {
 		return userRepository.save(user);
 	}
 	
-	public void deleteUser(String id) {
-		userRepository.deleteById(id);
+	public boolean deleteUser(String id) {
+		if(userRepository.existsById(id)) {
+			userRepository.deleteById(id);
+			return true;
+		}else {
+			return false;
+		}
+		
 	}
 }
