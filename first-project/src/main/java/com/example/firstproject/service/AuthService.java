@@ -44,7 +44,7 @@ public class AuthService {
 		String token = UUID.randomUUID().toString();
 		user.setResetToken(token);
 		repo.save(user);
-		String link = "http://localhost:8089/reset-password?token="+token;
+		String link = "http://localhost:3000/reset-password?token="+token;
 		emailService.sendEmail(user.getEmail(), "Reset Passowrd", link);
 		return "reset link sent to email";
 	}
