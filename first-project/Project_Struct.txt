@@ -16,7 +16,7 @@ first-project/
 	model/
 		User.java
 	security/
-		JavaUtil.java
+		JwtUtil.java
 		JwtFiler.java
 		SecurityConfig.java
 	dto/
