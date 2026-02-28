@@ -11,13 +11,17 @@ public class User {
 	private String name;
 	private String email;
 	private int age;
+	private String password;
+	private String resetToken;
 	
 	public User() {}
 	
-	public User(String name, String email, int age) {
+	public User(String name, String email, int age,String password, String resetToken) {
 		this.name = name;
 		this.email = email;
 		this.age = age;
+		this.password = password;
+		this.resetToken = resetToken;
 	}
 
 	public String getId() {
@@ -50,6 +54,22 @@ public class User {
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getResetToken() {
+		return resetToken;
+	}
+
+	public void setResetToken(String resetToken) {
+		this.resetToken = resetToken;
 	}
 	
 }
