@@ -1,0 +1,30 @@
+-> register
+-> Login
+-> Forgot password (send email)
+-> Reset Password
+-> Jwt Auth
+-> Mongodb 
+
+first-project/
+	controller/
+		AuthController.java
+	service/
+		AuthService.java
+		EmailService.java
+	repository/
+		UserRepository.java
+	model/
+		User.java
+	security/
+		JavaUtil.java
+		JwtFiler.java
+		SecurityConfig.java
+	dto/
+		LoginRequest.java
+		RegisterRequest.java
+		ResetPasswordRequest.java
+	config/
+		MongoConfig.java
+	FirstProjectApplication.java
+	
+	
