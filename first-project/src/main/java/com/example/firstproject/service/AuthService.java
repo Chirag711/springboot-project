@@ -26,11 +26,12 @@ public class AuthService {
 	
 	public String login(String email, String password) {
 		User user = repo.findByEmail(email);
+		
 		if(user == null) {
 			return "user not found";
 		}
 		if(user!=null && user.getPassword().equals(password)) {
-			return jwtUtil.generateToken(email);
+			return jwtUtil.generateToken(user.getEmail());
 		}
 		return "Invlid Credentials";
 	}
@@ -42,17 +43,21 @@ public class AuthService {
 		}
 		String token = UUID.randomUUID().toString();
 		user.setResetToken(token);
+		repo.save(user);
 		String link = "http://localhost:8089/reset-password?token="+token;
-		emailService.sendEmail(email, "Reset Passowrd", link);
+		emailService.sendEmail(user.getEmail(), "Reset Passowrd", link);
 		return "reset link sent to email";
 	}
 	
-	public String resetPassword(String token, String newPassword) {
+	public String resetPassword(String token, String password) {
 		User user = repo.findByResetToken(token);
 		if(user == null) {
 			return "Invalid token...";
 		}
-		user.setPassword(newPassword);
+		
+		System.out.println("old password -> "+user.getPassword());
+		System.out.println("new password -> "+ password);
+		user.setPassword(password);
 		user.setResetToken(null);
 		repo.save(user);
 		return "Password updated...";

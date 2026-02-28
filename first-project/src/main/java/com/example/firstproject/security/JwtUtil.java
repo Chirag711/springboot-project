@@ -2,23 +2,29 @@ package com.example.firstproject.security;
 
 import java.util.Date;
 
+import javax.crypto.SecretKey;
+
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 
 
 @Component
 public class JwtUtil {
-	private String SECRET = "thisisaspringapplication";
-	
-	public String generateToken(String email) {
-		return Jwts.builder()
-				.setSubject(email)
-				.setIssuedAt(new Date())
-				.setExpiration(new Date(System.currentTimeMillis()+10800000))
-				.signWith(SignatureAlgorithm.HS256, SECRET)
-				.compact();
-	}
+	private static final String SECRET = "mysecretkeymysecretkeymysecretkeymysecretkey";
+
+    public String generateToken(String email) {
+
+        SecretKey key = Keys.hmacShaKeyFor(SECRET.getBytes());
+
+        return Jwts.builder()
+                .setSubject(email)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 10800000))
+                .signWith(key)
+                .compact();
+    }
 	
 	public String extractEmail(String token) {
 		return Jwts.parser()

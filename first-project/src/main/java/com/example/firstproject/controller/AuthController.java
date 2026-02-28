@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.firstproject.dto.LoginRequest;
+import com.example.firstproject.dto.ResetPasswordRequest;
 import com.example.firstproject.model.User;
 import com.example.firstproject.service.AuthService;
 
@@ -22,15 +24,16 @@ public class AuthController {
 		return service.register(user);
 	}
 	@PostMapping("/login")
-	public String login(@RequestParam String email, @RequestParam String password) {
-		return service.login(email, password);
+	public String login(@RequestBody LoginRequest request ) {
+		return service.login(request.getEmail(), request.getPassword());
 	}
 	@PostMapping("/forgot-password")
-	public String forgotPassword(@RequestParam String email) {
-		return service.forgotPassword(email);
+	public String forgotPassword(@RequestBody LoginRequest request) {
+		return service.forgotPassword(request.getEmail());
 	}
 	@PostMapping("/reset-password")
-	public String resetPassword(@RequestParam String token, @RequestParam String password) {
-		return service.resetPassword(token, password);
+	public String resetPassword(@RequestBody ResetPasswordRequest req) {
+		
+		return service.resetPassword(req.getToken(), req.getPassword());
 	}
 }
